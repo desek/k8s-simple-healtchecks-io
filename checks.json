@@ -1,0 +1,22 @@
+[
+    {
+        "test": "date",
+        "success": "curl --retry 3 --silent https://hc-ping.com/{guid}",
+        "comment": "Will always return 0"
+    },
+    {
+        "test": "nslookup bing.com. 1.1.1.1",
+        "success": "curl --retry 3 --silent https://hc-ping.com/{guid}",
+        "comment": "nslookup will not return 0 on unsuccessful resolve"
+    },
+    {
+        "test": "curl https://bing.com -k",
+        "success": "curl --retry 3 --silent https://hc-ping.com/{guid}",
+        "comment": "curl will not return 0 if no http response is recieved. -k for skipping certificate check which can return 60"
+    },
+    {
+        "test": "nc -w4 -z {ip} {port}",
+        "success": "curl --retry 3 --silent https://hc-ping.com/{guid}",
+        "comment": "nc will not return 0 if no tcp session can be established within 4 seconds"
+    }
+]

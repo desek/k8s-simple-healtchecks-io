@@ -1,0 +1,17 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: healthchecks
+spec:
+  schedule: "*/5 * * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: healthchecks
+            image: yourrepo.azurecr.io/healthchecks
+            env:
+            - name: CONFIGURI
+              value: https://path.to/configuration.json
+          restartPolicy: Never
